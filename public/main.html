@@ -1,0 +1,18 @@
+<div class="clearfix">
+	<form ng-Submit="placeOrder()" ng-show="isServer()">
+		<h4>Place an order:</h4>
+		<textarea ng-keydown="checkEnter($event)" required class="form-control" maxlength="200" style="max-width: 100%;" rows="3" placeholder="New order" ng-model="newOrder.text"></textarea>
+		<input class="btn submit-btn pull-right" type="submit" value="Place" />
+	</form>
+</div>
+<div id="order-stream" ng-show="authenticated">
+	<h4>American Grill Orders</h4>
+	<div class="order" ng-repeat="order in orders | orderBy:'created_at':true" ng-class-odd="'odd'" ng-class-even="'even'"> 
+		<p>{{order.text}}</p>
+		<small>Placed by {{order.created_by}}</small>
+		<small class="pull-right">{{order.created_at | date:"h:mma 'on' MMM d, y"}}</small>
+	</div>
+</div>
+<div ng-show="!authenticated">
+	<h4 class="text-danger" style="text-align: center;">You must login to see and manage orders.</h4>
+</div>
